@@ -6,6 +6,7 @@ import Loading from "../../Layout/Loading";
 const Purchase = () => {
   const [user, loading] = useAuthState(auth);
 
+  console.log(user);
   if (loading) {
     return <Loading />;
   }
