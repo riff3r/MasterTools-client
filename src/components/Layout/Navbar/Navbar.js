@@ -1,16 +1,14 @@
 import React from "react";
-import Home from "../../Page/Home/Home";
-import Footer from "../Footer/Footer";
 import NavLinks from "../NavLinks/NavLinks";
 
-const Navbar = () => {
+const Navbar = ({ children }) => {
   return (
     <div class="drawer drawer-end">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div className="container mx-auto">
-          <div class="w-full navbar bg- py-6">
+          <div class="w-full navbar bg-white py-6">
             <div class="flex-1 px-2 mx-2 text-2xl font-semibold">
               <span className="text-primary">Master</span>Tools
             </div>
@@ -42,9 +40,7 @@ const Navbar = () => {
 
         {/* <!-- Page content here --> */}
 
-        <Home />
-
-        <Footer />
+        {children}
       </div>
 
       <div class="drawer-side">
