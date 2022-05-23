@@ -1,5 +1,6 @@
 import React from "react";
 import Home from "../../Page/Home/Home";
+import Footer from "../Footer/Footer";
 import NavLinks from "../NavLinks/NavLinks";
 
 const Navbar = () => {
@@ -42,6 +43,8 @@ const Navbar = () => {
         {/* <!-- Page content here --> */}
 
         <Home />
+
+        <Footer />
       </div>
 
       <div class="drawer-side">

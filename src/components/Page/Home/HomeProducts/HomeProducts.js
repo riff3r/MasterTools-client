@@ -6,7 +6,7 @@ const HomeProducts = () => {
     <div className="container mx-auto">
       <PrimaryHeadline title="Our Products" />
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {/* <div class="card lg:card-side bg-base-100 shadow-2xl">
           <figure>
             <img
