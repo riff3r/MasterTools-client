@@ -1,17 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import NavLinks from "../NavLinks/NavLinks";
 
 const Navbar = ({ children }) => {
   return (
-    <div class="drawer drawer-end">
+    <div class="drawer drawer-end bg-white">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div className="container mx-auto">
-          <div class="w-full navbar bg-white py-6">
-            <div class="flex-1 px-2 mx-2 text-2xl font-semibold">
+          <div class="w-full navbar py-6">
+            <Link to="/" class="flex-1 px-2 mx-2 text-2xl font-semibold">
               <span className="text-primary">Master</span>Tools
-            </div>
+            </Link>
             <div class="flex-none hidden lg:block">
               <ul class="menu menu-horizontal">
                 {/* <!-- Navbar menu content here --> */}
@@ -19,7 +20,7 @@ const Navbar = ({ children }) => {
               </ul>
             </div>
             <div class="flex-none lg:hidden">
-              <label for="my-drawer-3" class="btn btn-square btn-ghost">
+              <label htmlFor="my-drawer-3" class="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -27,9 +28,9 @@ const Navbar = ({ children }) => {
                   class="inline-block w-6 h-6 stroke-current"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M4 6h16M4 12h16M4 18h16"
                   ></path>
                 </svg>
@@ -44,7 +45,7 @@ const Navbar = ({ children }) => {
       </div>
 
       <div class="drawer-side">
-        <label for="my-drawer-3" class="drawer-overlay"></label>
+        <label htmlFor="my-drawer-3" class="drawer-overlay"></label>
         <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
           {/* <!-- Sidebar content here --> */}
           <NavLinks />

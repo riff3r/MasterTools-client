@@ -1,6 +1,15 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import Loading from "../../Layout/Loading";
 
 const Purchase = () => {
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <div class="hero min-h-screen bg-accent">
