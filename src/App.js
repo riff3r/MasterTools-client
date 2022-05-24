@@ -7,6 +7,7 @@ import Login from "./components/Page/Login/Login";
 import Signup from "./components/Page/Signup/Signup";
 import RequireAuth from "./components/Authentication/RequireAuth";
 import NotFound from "./components/Page/NotFound/NotFound";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         </Routes>
         <Footer />
       </Navbar>
+
+      <ToastContainer />
     </div>
   );
 }

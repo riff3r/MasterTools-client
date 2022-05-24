@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
 import Loading from "../../Layout/Loading";
 
 const Purchase = () => {
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
+  const [orderStatus, setOrderStatus] = useState(true);
 
-  console.log(user);
-  if (loading) {
-    return <Loading />;
-  }
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
+  const orderQuantity = watch("quantity");
+  console.log(orderQuantity);
+
+  const orderReq = {
+    moq: 100,
+    au: 1000,
+  };
+
+  useEffect(() => {
+    if (orderQuantity < orderReq.moq) {
+      setOrderStatus(false);
+      toast.error("You order quantity bellow the moq");
+      return;
+    } else {
+      setOrderStatus(true);
+    }
+  }, [orderQuantity]);
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div>
       <div class="hero min-h-screen bg-accent">
@@ -35,15 +61,16 @@ const Purchase = () => {
               <div class="card-body">
                 <h2 class="card-title">Order Confirmation</h2>
 
-                <form className="">
+                <form onSubmit={handleSubmit(onSubmit)} className="">
                   <div class="form-control w-full max-w-xs mb-5">
                     <label class="label">
                       <span class="label-text">Quantity</span>
                     </label>
                     <input
                       type="number"
-                      placeholder="Type here"
                       class="input input-bordered input-primary w-full max-w-xs"
+                      {...register("quantity")}
+                      placeholder={orderReq.moq}
                     />
                   </div>
 
@@ -51,12 +78,16 @@ const Purchase = () => {
                     type="text"
                     placeholder="User Name"
                     class="input input-bordered input-primary w-full max-w-xs mb-5"
+                    value={user.displayName}
+                    disabled
                   />
 
                   <input
                     type="email"
                     placeholder="Email"
                     class="input input-bordered input-primary w-full max-w-xs mb-5"
+                    value={user.email}
+                    disabled
                   />
 
                   <input
@@ -69,11 +100,17 @@ const Purchase = () => {
                     class="textarea textarea-primary w-full"
                     placeholder="Address"
                   ></textarea>
-                </form>
 
-                <div class="card-actions justify-end">
-                  <button class="btn btn-primary">Buy Now</button>
-                </div>
+                  <div class="card-actions justify-end">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      disabled={!orderStatus}
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
