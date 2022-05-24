@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
-import Loading from "../../Layout/Loading";
 
 const Purchase = () => {
   const [user] = useAuthState(auth);
@@ -16,6 +14,7 @@ const Purchase = () => {
     formState: { errors },
   } = useForm();
 
+  console.log(errors);
   const orderQuantity = watch("quantity");
   console.log(orderQuantity);
 
@@ -24,19 +23,10 @@ const Purchase = () => {
     au: 1000,
   };
 
-  useEffect(() => {
-    if (orderQuantity < orderReq.moq) {
-      setOrderStatus(false);
-      toast.error("You order quantity bellow the moq");
-      return;
-    } else {
-      setOrderStatus(true);
-    }
-  }, [orderQuantity]);
-
   const onSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <div>
       <div class="hero min-h-screen bg-accent">
@@ -69,9 +59,27 @@ const Purchase = () => {
                     <input
                       type="number"
                       class="input input-bordered input-primary w-full max-w-xs"
-                      {...register("quantity")}
+                      {...register("quantity", {
+                        validate: {
+                          minOrder: (value) =>
+                            value >= orderReq.moq ||
+                            "Your order quantity is lower then minimum order quantity ",
+                          maxOrder: (value) =>
+                            value <= orderReq.au ||
+                            "Your order quantity is higher then available quantity ",
+                        },
+                      })}
                       placeholder={orderReq.moq}
                     />
+
+                    {(errors.quantity?.type === "minOrder" ||
+                      errors.quantity?.type === "maxOrder") && (
+                      <label class="label">
+                        <span class="label-text text-red-500">
+                          {errors?.quantity?.message}
+                        </span>
+                      </label>
+                    )}
                   </div>
 
                   <input
@@ -90,22 +98,53 @@ const Purchase = () => {
                     disabled
                   />
 
-                  <input
-                    type="text"
-                    placeholder="Phone"
-                    class="input input-bordered input-primary w-full max-w-xs mb-5"
-                  />
+                  <div class="form-control w-full max-w-xs">
+                    <input
+                      type="number"
+                      placeholder="Phone"
+                      class="input input-bordered input-primary w-full max-w-xs mb-5"
+                      {...register("phone", {
+                        required: {
+                          value: true,
+                          message: "Please input your phone number",
+                        }, // JS only: <p>error message</p> TS only support string
+                      })}
+                    />
+
+                    {errors.phone?.type === "required" && (
+                      <label class="label">
+                        <span class="label-text text-red-500">
+                          {errors?.phone?.message}
+                        </span>
+                      </label>
+                    )}
+                  </div>
 
                   <textarea
                     class="textarea textarea-primary w-full"
                     placeholder="Address"
+                    {...register("address", {
+                      required: {
+                        value: true,
+                        message: "Please input your address",
+                      }, // JS only: <p>error message</p> TS only support string
+                    })}
                   ></textarea>
+                  {errors.address?.type === "required" && (
+                    <label class="label">
+                      <span class="label-text text-red-500">
+                        {errors?.address?.message}
+                      </span>
+                    </label>
+                  )}
 
                   <div class="card-actions justify-end">
                     <button
                       type="submit"
                       class="btn btn-primary"
-                      disabled={!orderStatus}
+                      disabled={
+                        errors?.quantity || errors.phone || errors.address
+                      }
                     >
                       Buy Now
                     </button>

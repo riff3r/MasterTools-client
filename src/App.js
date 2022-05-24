@@ -7,7 +7,9 @@ import Login from "./components/Page/Login/Login";
 import Signup from "./components/Page/Signup/Signup";
 import RequireAuth from "./components/Authentication/RequireAuth";
 import NotFound from "./components/Page/NotFound/NotFound";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./components/Page/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />

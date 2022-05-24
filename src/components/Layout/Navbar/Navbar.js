@@ -14,7 +14,7 @@ const Navbar = ({ children }) => {
               <span className="text-primary">Master</span>Tools
             </Link>
             <div class="flex-none hidden lg:block">
-              <ul class="menu menu-horizontal">
+              <ul class="menu menu-horizontal gap-x-5 font-semibold">
                 {/* <!-- Navbar menu content here --> */}
                 <NavLinks />
               </ul>

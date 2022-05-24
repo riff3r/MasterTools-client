@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Rating } from "react-simple-star-rating";
 
 const Review = () => {
   const [rating, setRating] = useState(4);

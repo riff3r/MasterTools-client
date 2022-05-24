@@ -11,13 +11,23 @@ const NavLinks = () => {
   return (
     <Fragment>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink className="rounded-lg" to="/">
+          Home
+        </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink to="/dashboard">Dashboard</NavLink>
+        </li>
+      )}
+
       <li>
         {!user ? (
           <NavLink to="login">Login</NavLink>
         ) : (
-          <button onClick={() => signOut(auth)}>Logout</button>
+          <button className="font-semibold" onClick={() => signOut(auth)}>
+            Logout
+          </button>
         )}
       </li>
     </Fragment>
