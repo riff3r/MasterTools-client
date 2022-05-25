@@ -1,13 +1,16 @@
-import React, { Fragment } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
-import Loading from "../Loading";
 import { signOut } from "firebase/auth";
+import React, { Fragment } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { NavLink } from "react-router-dom";
+import auth from "../../../firebase.init";
 
 const NavLinks = () => {
   const [user] = useAuthState(auth);
 
+  const logout = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+  };
   return (
     <Fragment>
       <li>
@@ -25,7 +28,7 @@ const NavLinks = () => {
         {!user ? (
           <NavLink to="login">Login</NavLink>
         ) : (
-          <button className="font-semibold" onClick={() => signOut(auth)}>
+          <button className="font-semibold" onClick={logout}>
             Logout
           </button>
         )}
