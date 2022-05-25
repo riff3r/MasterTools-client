@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const MyOrders = () => {
+  const [orders, setOrders] = useState([]);
+  const [user] = useAuthState(auth);
+
   return (
     <div>
       <div class="overflow-x-auto">

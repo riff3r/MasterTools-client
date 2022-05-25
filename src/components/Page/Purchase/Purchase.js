@@ -56,6 +56,7 @@ const Purchase = () => {
                     <label class="label">
                       <span class="label-text">Quantity</span>
                     </label>
+
                     <input
                       type="number"
                       class="input input-bordered input-primary w-full max-w-xs"
