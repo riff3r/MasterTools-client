@@ -151,7 +151,7 @@ const SignUp = () => {
 
             {signInError}
             <input
-              className="btn w-full max-w-xs text-white"
+              className="btn btn-primary w-full max-w-xs text-white"
               type="submit"
               value="Sign Up"
             />

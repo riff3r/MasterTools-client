@@ -1,8 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-
-const axios = require("axios").default;
+import axios from "axios";
 
 const AddProduct = () => {
   const {

@@ -1,15 +1,38 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const AddReview = () => {
+  const [user] = useAuthState(auth);
+  console.log(user);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    if (user?.photoURL) {
+      data.image = user?.photoURL;
+    }
+
+    data.name = user?.displayName;
+
+    console.log(data);
+
+    axios.post("http://localhost:5000/review", data).then((res) => {
+      console.log(res);
+      if (res?.data?.acknowledged) {
+        reset();
+        toast.success("Review Uploaded");
+      }
+    });
+  };
   return (
     <div className="flex items-center justify-center mt-52">
       <div class="card w-96 bg-accent shadow-xl">
@@ -25,11 +48,11 @@ const AddReview = () => {
                 {...register("rating")}
                 class="select select-primary w-full max-w-xs mb-3"
               >
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
                 <option value={5}>5</option>
+                <option value={4}>4</option>
+                <option value={3}>3</option>
+                <option value={2}>2</option>
+                <option value={1}>1</option>
               </select>
 
               <textarea

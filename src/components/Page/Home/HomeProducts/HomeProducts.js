@@ -17,15 +17,18 @@ const HomeProducts = () => {
     return <Loading />;
   }
 
-  console.log(products);
   return (
     <div className="container mx-auto">
       <PrimaryHeadline title="Our Products" />
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
-        {products.slice(0, 3).map((product) => (
-          <HomeProduct key={product._id} product={product} />
-        ))}
+        {Array.isArray(products)
+          ? products
+              ?.slice(0, 3)
+              ?.map((product) => (
+                <HomeProduct key={product._id} product={product} />
+              ))
+          : []}
       </div>
     </div>
   );

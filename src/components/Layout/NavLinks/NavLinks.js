@@ -26,7 +26,10 @@ const NavLinks = () => {
 
       <li>
         {!user ? (
-          <NavLink to="login">Login</NavLink>
+          <Fragment>
+            <NavLink to="login">Login</NavLink>
+            <NavLink to="signup">Signup</NavLink>
+          </Fragment>
         ) : (
           <button className="font-semibold" onClick={logout}>
             Logout
