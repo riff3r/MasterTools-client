@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const MyProfile = () => {
   const {
@@ -9,7 +10,9 @@ const MyProfile = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <div>
@@ -26,15 +29,19 @@ const MyProfile = () => {
         <div class="form-control w-full max-w-full">
           <div class="card w-96 bg-accent shadow-xl">
             <div class="card-body">
-              <h2 class="card-title">Add Review</h2>
+              <h2 class="card-title">Add more more information</h2>
 
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div class="form-control w-full max-w-xs">
                   <input
+                    {...register("number", { required: true })}
                     type="text"
                     placeholder="Phone number"
                     class="input input-bordered input-primary w-full max-w-full mb-3"
                   />
+                  {errors.number && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
 
                   <textarea
                     {...register("address", { required: true })}
@@ -46,6 +53,7 @@ const MyProfile = () => {
                   )}
 
                   <input
+                    {...register("linkedin")}
                     type="text"
                     placeholder="LinkedIn Profile"
                     class="input input-bordered input-primary w-full max-w-full mb-3"
