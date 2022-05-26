@@ -6,6 +6,7 @@ import Loading from "../../Layout/Loading";
 import axios from "axios";
 import { toast } from "react-toastify";
 import DeleteConfirmModal from "./DeleteConfirmModal";
+import { Link } from "react-router-dom";
 
 const MyOrders = () => {
   const [user] = useAuthState(auth);
@@ -39,6 +40,7 @@ const MyOrders = () => {
               <th>Tools Name</th>
               <th>Quantity</th>
               <th>Price</th>
+              <th>Payment</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -50,18 +52,32 @@ const MyOrders = () => {
                 <td>{order.quantity}</td>
                 <td>{order.totalPrice}</td>
                 <td>
-                  <button className="btn btn-success btn-xs mr-2">Pay</button>
-
-                  <label
-                    for="delete-confirm-modal"
-                    className="btn btn-error btn-xs"
-                    onClick={() => {
-                      setDeletingOrderId(order._id);
-                      setDeleteOrder(true);
-                    }}
-                  >
-                    Cancel
-                  </label>
+                  {!order.paid ? (
+                    <Link
+                      to={`/dashboard/payment/${order._id}`}
+                      className="btn btn-success btn-xs mr-2"
+                    >
+                      Pay
+                    </Link>
+                  ) : (
+                    <button className="btn btn-primary btn-xs mr-2">
+                      Paid
+                    </button>
+                  )}
+                </td>
+                <td>
+                  {!order.paid && (
+                    <label
+                      for="delete-confirm-modal"
+                      className="btn btn-error btn-xs"
+                      onClick={() => {
+                        setDeletingOrderId(order._id);
+                        setDeleteOrder(true);
+                      }}
+                    >
+                      Cancel
+                    </label>
+                  )}
                 </td>
               </tr>
             ))}
