@@ -18,6 +18,8 @@ import ManageProducts from "./components/Page/Dashboard/ManageProducts";
 import MakeAdmin from "./components/Page/Dashboard/MakeAdmin";
 import AddProduct from "./components/Page/Dashboard/AddProduct";
 import Payment from "./components/Page/Dashboard/Payment";
+import Blog from "./components/Page/Blog/Blog";
+import Portfolio from "./components/Page/Portfolio";
 
 function App() {
   return (
@@ -43,7 +45,7 @@ function App() {
               </RequireAuth>
             }
           >
-            <Route index element={<MyOrders />} />
+            <Route index element={<MyProfile />} />
 
             <Route index path="myOrders" element={<MyOrders />} />
 
@@ -61,6 +63,9 @@ function App() {
 
             <Route path="payment/:id" element={<Payment />} />
           </Route>
+
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />
