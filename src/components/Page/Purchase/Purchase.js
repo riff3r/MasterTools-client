@@ -37,6 +37,7 @@ const Purchase = () => {
   // console.log(currentOrderQuantity);
 
   const onSubmit = (data) => {
+    data.status = "pending";
     const productInfo = {
       title: product.title,
       productId: product._id,

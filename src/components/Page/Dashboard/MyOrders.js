@@ -5,9 +5,12 @@ import { useQuery } from "react-query";
 import Loading from "../../Layout/Loading";
 import axios from "axios";
 import { toast } from "react-toastify";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 
 const MyOrders = () => {
   const [user] = useAuthState(auth);
+  const [deleteOrder, setDeleteOrder] = useState(null);
+  const [deletingOrderId, setDeletingOrderId] = useState(null);
   const {
     isLoading,
     error,
@@ -22,16 +25,6 @@ const MyOrders = () => {
   if (isLoading) {
     return <Loading />;
   }
-
-  const handleDeleteOrder = (id) => {
-    axios.delete(`http://localhost:5000/order/${id}`).then((res) => {
-      console.log(res);
-      if (res.data.deletedCount > 0) {
-        refetch();
-        toast.error("Order Canceled");
-      }
-    });
-  };
 
   console.log(myOrders);
 
@@ -59,18 +52,30 @@ const MyOrders = () => {
                 <td>
                   <button className="btn btn-success btn-xs mr-2">Pay</button>
 
-                  <button
-                    onClick={() => handleDeleteOrder(order._id)}
-                    className="btn btn-error btn-xs "
+                  <label
+                    for="delete-confirm-modal"
+                    className="btn btn-error btn-xs"
+                    onClick={() => {
+                      setDeletingOrderId(order._id);
+                      setDeleteOrder(true);
+                    }}
                   >
                     Cancel
-                  </button>
+                  </label>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {deleteOrder && (
+        <DeleteConfirmModal
+          setDeleteOrder={setDeleteOrder}
+          order={deletingOrderId}
+          deleteOrder={deleteOrder}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };

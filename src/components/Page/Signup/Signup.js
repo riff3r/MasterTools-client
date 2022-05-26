@@ -24,8 +24,6 @@ const SignUp = () => {
 
   const [token] = useToken(user || gUser);
 
-  console.log(token);
-
   const navigate = useNavigate();
 
   let signInError;
