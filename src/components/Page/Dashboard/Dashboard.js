@@ -10,16 +10,16 @@ const Dashboard = () => {
   const [admin] = useAdmin(user);
 
   return (
-    <div class="drawer drawer-mobile min-h-screen">
-      <input id="dashboardSidebar" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content p-5">
+    <div className="drawer drawer-mobile min-h-screen">
+      <input id="dashboardSidebar" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content p-5">
         {/* <!-- Page content here --> */}
 
         <Outlet />
       </div>
-      <div class="drawer-side">
-        <label for="dashboardSidebar" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-200 text-base-content">
+      <div className="drawer-side">
+        <label htmlFor="dashboardSidebar" className="drawer-overlay"></label>
+        <ul className="menu p-4 overflow-y-auto w-80 bg-base-200 text-base-content">
           {/* <!-- Sidebar content here --> */}
 
           {!admin && (

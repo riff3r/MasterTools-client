@@ -15,7 +15,7 @@ const ManageAllOrders = () => {
     data: orders,
     refetch,
   } = useQuery("allOrders", () =>
-    fetch("https://peaceful-lowlands-36792.herokuapp.com/order", {
+    fetch("http://localhost:5000/order", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -33,7 +33,7 @@ const ManageAllOrders = () => {
       productId: order.productId,
       quantity: order.quantity,
     };
-    fetch(`https://peaceful-lowlands-36792.herokuapp.com/status/${order._id}`, {
+    fetch(`http://localhost:5000/status/${order._id}`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -55,12 +55,12 @@ const ManageAllOrders = () => {
 
   return (
     <div>
-      <div class="overflow-x-auto">
+      <div className="overflow-x-auto">
         <h1 className="text-3xl font-semibold border-b pb-3 mb-5">
           Manage orders
         </h1>
 
-        <table class="table w-full">
+        <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>
@@ -101,7 +101,7 @@ const ManageAllOrders = () => {
                 <td>
                   {!order.paid ? (
                     <label
-                      for="delete-confirm-modal"
+                      htmlFor="delete-confirm-modal"
                       className="btn btn-error btn-xs"
                       onClick={() => {
                         setDeletingOrderId(order._id);

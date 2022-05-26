@@ -20,9 +20,7 @@ const Purchase = () => {
     data: product,
     refetch,
   } = useQuery("products", () =>
-    fetch(`https://peaceful-lowlands-36792.herokuapp.com/product/${id}`).then(
-      (res) => res.json()
-    )
+    fetch(`http://localhost:5000/product/${id}`).then((res) => res.json())
   );
 
   const {
@@ -58,14 +56,12 @@ const Purchase = () => {
     };
 
     console.log(order);
-    axios
-      .post(`https://peaceful-lowlands-36792.herokuapp.com/order`, order)
-      .then((res) => {
-        if (res.data.acknowledged) {
-          reset();
-          toast.success("You order placed");
-        }
-      });
+    axios.post(`http://localhost:5000/order`, order).then((res) => {
+      if (res.data.acknowledged) {
+        reset();
+        toast.success("You order placed");
+      }
+    });
   };
 
   if (isLoading) {
@@ -74,13 +70,13 @@ const Purchase = () => {
 
   return (
     <div>
-      <div class="hero min-h-screen bg-accent">
+      <div className="hero min-h-screen bg-accent">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div>
               <img width={300} src={product?.url} alt="" />
-              <h1 class="text-5xl font-bold">{product?.title}</h1>
-              <p class="py-6">{product?.description}</p>
+              <h1 className="text-5xl font-bold">{product?.title}</h1>
+              <p className="py-6">{product?.description}</p>
               <p>minimum order quantity: {product?.moq}</p>
               <p>available quantity: {product?.quantity}</p>
               <p>Unit price: {product?.price}</p>
@@ -92,19 +88,19 @@ const Purchase = () => {
               </p>
             </div>
 
-            <div class="card w-96 bg-base-100 shadow-xl">
-              <div class="card-body">
-                <h2 class="card-title">Order Confirmation</h2>
+            <div className="card w-96 bg-base-100 shadow-xl">
+              <div className="card-body">
+                <h2 className="card-title">Order Confirmation</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="">
-                  <div class="form-control w-full max-w-xs mb-5">
-                    <label class="label">
-                      <span class="label-text">Quantity</span>
+                  <div className="form-control w-full max-w-xs mb-5">
+                    <label className="label">
+                      <span className="label-text">Quantity</span>
                     </label>
 
                     <input
                       type="number"
-                      class="input input-bordered input-primary w-full max-w-xs"
+                      className="input input-bordered input-primary w-full max-w-xs"
                       {...register("quantity", {
                         validate: {
                           minOrder: (value) =>
@@ -120,8 +116,8 @@ const Purchase = () => {
 
                     {(errors.quantity?.type === "minOrder" ||
                       errors.quantity?.type === "maxOrder") && (
-                      <label class="label">
-                        <span class="label-text text-red-500">
+                      <label className="label">
+                        <span className="label-text text-red-500">
                           {errors?.quantity?.message}
                         </span>
                       </label>
@@ -131,7 +127,7 @@ const Purchase = () => {
                   <input
                     type="text"
                     placeholder="User Name"
-                    class="input input-bordered input-primary w-full max-w-xs mb-5"
+                    className="input input-bordered input-primary w-full max-w-xs mb-5"
                     value={user.displayName}
                     disabled
                   />
@@ -139,16 +135,16 @@ const Purchase = () => {
                   <input
                     type="email"
                     placeholder="Email"
-                    class="input input-bordered input-primary w-full max-w-xs mb-5"
+                    className="input input-bordered input-primary w-full max-w-xs mb-5"
                     value={user.email}
                     disabled
                   />
 
-                  <div class="form-control w-full max-w-xs">
+                  <div className="form-control w-full max-w-xs">
                     <input
                       type="number"
                       placeholder="Phone"
-                      class="input input-bordered input-primary w-full max-w-xs mb-5"
+                      className="input input-bordered input-primary w-full max-w-xs mb-5"
                       {...register("phone", {
                         required: {
                           value: true,
@@ -158,8 +154,8 @@ const Purchase = () => {
                     />
 
                     {errors.phone?.type === "required" && (
-                      <label class="label">
-                        <span class="label-text text-red-500">
+                      <label className="label">
+                        <span className="label-text text-red-500">
                           {errors?.phone?.message}
                         </span>
                       </label>
@@ -167,7 +163,7 @@ const Purchase = () => {
                   </div>
 
                   <textarea
-                    class="textarea textarea-primary w-full"
+                    className="textarea textarea-primary w-full"
                     placeholder="Address"
                     {...register("address", {
                       required: {
@@ -177,17 +173,17 @@ const Purchase = () => {
                     })}
                   ></textarea>
                   {errors.address?.type === "required" && (
-                    <label class="label">
-                      <span class="label-text text-red-500">
+                    <label className="label">
+                      <span className="label-text text-red-500">
                         {errors?.address?.message}
                       </span>
                     </label>
                   )}
 
-                  <div class="card-actions justify-end">
+                  <div className="card-actions justify-end">
                     <button
                       type="submit"
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                       disabled={
                         errors?.quantity || errors.phone || errors.address
                       }

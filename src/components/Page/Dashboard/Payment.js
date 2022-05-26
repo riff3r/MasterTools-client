@@ -12,7 +12,7 @@ const stripePromise = loadStripe(
 
 const Payment = () => {
   const { id } = useParams();
-  const url = `https://peaceful-lowlands-36792.herokuapp.com/orders/${id}`;
+  const url = `http://localhost:5000/orders/${id}`;
 
   const { data: order, isLoading } = useQuery(["booking", id], () =>
     fetch(url, {
@@ -30,25 +30,25 @@ const Payment = () => {
   console.log(order);
   return (
     <div>
-      <div class="hero min-h-screen w-full">
+      <div className="hero min-h-screen w-full">
         <div
-          class="hero-content w-7/12
+          className="hero-content w-7/12
         
         flex-col "
         >
           {/* First Part */}
-          <div class="card w-full  bg-base-100 shadow-xl">
-            <div class="card-body">
+          <div className="card w-full  bg-base-100 shadow-xl">
+            <div className="card-body">
               <p className="text-primary font-bold">Hello, {order.userName}</p>
-              <h2 class="card-title">Pay for {order.title}</h2>
+              <h2 className="card-title">Pay for {order.title}</h2>
 
               <p>Please Pay ${order.totalPrice}</p>
             </div>
           </div>
 
           {/* Second Part */}
-          <div class="card  w-full  shadow-2xl bg-base-100">
-            <div class="card-body">
+          <div className="card  w-full  shadow-2xl bg-base-100">
+            <div className="card-body">
               <Elements stripe={stripePromise}>
                 <CheckoutForm order={order} />
               </Elements>

@@ -6,8 +6,8 @@ const ProductRow = ({ product, index, setProductId, setDeleteProduct }) => {
     <tr>
       <th>{index}</th>
       <td>
-        <div class="avatar">
-          <div class="w-32 rounded">
+        <div className="avatar">
+          <div className="w-32 rounded">
             <img src={url} />
           </div>
         </div>
@@ -17,7 +17,7 @@ const ProductRow = ({ product, index, setProductId, setDeleteProduct }) => {
       <td>{price}</td>
       <td>
         <label
-          for="delete-confirm-modal"
+          htmlFor="delete-confirm-modal"
           className="btn btn-error btn-xs"
           onClick={() => {
             setProductId(product._id);

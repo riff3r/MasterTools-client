@@ -10,40 +10,42 @@ const DeleteConfirmModal = ({
 }) => {
   const handleDeleteOrder = (id) => {
     console.log(id);
-    axios
-      .delete(`https://peaceful-lowlands-36792.herokuapp.com/${url}/${id}`)
-      .then((res) => {
-        console.log(res);
-        if (res.data.deletedCount > 0) {
-          setDeleteOrder(null);
-          refetch();
-          toast.error(`${url} has been deleted`);
-        }
-      });
+    axios.delete(`http://localhost:5000/${url}/${id}`).then((res) => {
+      console.log(res);
+      if (res.data.deletedCount > 0) {
+        setDeleteOrder(null);
+        refetch();
+        toast.error(`${url} has been deleted`);
+      }
+    });
   };
   return (
     <div>
       {/* <!-- The button to open modal --> */}
-      {/* <label for="delete-confirm-modal" class="btn modal-button">
+      {/* <label htmlFor="delete-confirm-modal" className="btn modal-button">
         open modal
       </label> */}
 
       {/* <!-- Put this part before </body> tag --> */}
-      <input type="checkbox" id="delete-confirm-modal" class="modal-toggle" />
-      <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-          <h3 class="font-bold text-lg text text-red-500">
+      <input
+        type="checkbox"
+        id="delete-confirm-modal"
+        className="modal-toggle"
+      />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text text-red-500">
             Do you want to delete this {url}?
           </h3>
-          <p class="py-4">Once you delete the {url} it's can't be undo!</p>
-          <div class="modal-action">
+          <p className="py-4">Once you delete the {url} it's can't be undo!</p>
+          <div className="modal-action">
             <label
               onClick={() => handleDeleteOrder(order)}
-              class="btn btn-error"
+              className="btn btn-error"
             >
               Delete
             </label>
-            <label for="delete-confirm-modal" class="btn">
+            <label htmlFor="delete-confirm-modal" className="btn">
               Cancel
             </label>
           </div>

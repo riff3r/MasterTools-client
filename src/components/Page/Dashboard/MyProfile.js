@@ -22,9 +22,7 @@ const MyProfile = () => {
     refetch,
     data: myProfile,
   } = useQuery("myProfile", () =>
-    fetch(
-      `https://peaceful-lowlands-36792.herokuapp.com/user/${user?.email}`
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/user/${user?.email}`).then((res) => res.json())
   );
 
   if (isLoading) {
@@ -36,10 +34,7 @@ const MyProfile = () => {
   const onSubmit = (data) => {
     console.log(data);
     axios
-      .put(
-        `https://peaceful-lowlands-36792.herokuapp.com/user/${myProfile?.email}`,
-        data
-      )
+      .put(`http://localhost:5000/user/${myProfile?.email}`, data)
       .then((res) => {
         //   console.log(res.data.token);
         const accessToken = res.data.token;
@@ -71,18 +66,18 @@ const MyProfile = () => {
           )}
         </div>
 
-        <div class="form-control w-full max-w-full">
-          <div class="card w-96 bg-accent shadow-xl">
-            <div class="card-body">
-              <h2 class="card-title">Add more more information</h2>
+        <div className="form-control w-full max-w-full">
+          <div className="card md:w-96 bg-accent shadow-xl">
+            <div className="card-body">
+              <h2 className="card-title">Add more information</h2>
 
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div class="form-control w-full max-w-xs">
+                <div className="form-control w-full max-w-xs">
                   <input
                     {...register("number", { required: true })}
                     type="text"
                     placeholder="Phone number"
-                    class="input input-bordered input-primary w-full max-w-full mb-3"
+                    className="input input-bordered input-primary w-full max-w-full mb-3"
                   />
                   {errors.number && (
                     <span className="text-red-500">This field is required</span>
@@ -90,7 +85,7 @@ const MyProfile = () => {
 
                   <textarea
                     {...register("address", { required: true })}
-                    class="textarea textarea-primary mb-3"
+                    className="textarea textarea-primary mb-3"
                     placeholder="Address"
                   ></textarea>
                   {errors.description && (
@@ -101,11 +96,11 @@ const MyProfile = () => {
                     {...register("linkedin")}
                     type="text"
                     placeholder="LinkedIn Profile"
-                    class="input input-bordered input-primary w-full max-w-full mb-3"
+                    className="input input-bordered input-primary w-full max-w-full mb-3"
                   />
 
-                  <div class="card-actions justify-center">
-                    <button type="submit" class="btn btn-primary">
+                  <div className="card-actions justify-center">
+                    <button type="submit" className="btn btn-primary">
                       Submit
                     </button>
                   </div>

@@ -7,22 +7,22 @@ import NavLinks from "../NavLinks/NavLinks";
 const Navbar = ({ children }) => {
   const [user] = useAuthState(auth);
   return (
-    <div class="drawer drawer-end bg-white">
-      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col">
+    <div className="drawer drawer-end bg-white">
+      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div className="container mx-auto">
-          <div class="w-full navbar py-6">
+          <div className="w-full navbar py-6">
             {user && (
               <label
                 htmlFor="dashboardSidebar"
-                class="btn btn-square btn-ghost drawer-button lg:hidden"
+                className="btn btn-square btn-ghost drawer-button lg:hidden"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  class="inline-block w-6 h-6 stroke-current"
+                  className="inline-block w-6 h-6 stroke-current"
                 >
                   <path
                     strokeLinecap="round"
@@ -34,22 +34,22 @@ const Navbar = ({ children }) => {
               </label>
             )}
 
-            <Link to="/" class="flex-1 px-2 mx-2 text-2xl font-semibold">
+            <Link to="/" className="flex-1 px-2 mx-2 text-2xl font-semibold">
               <span className="text-primary">Master</span>Tools
             </Link>
-            <div class="flex-none hidden lg:block">
-              <ul class="menu menu-horizontal gap-x-5 font-semibold">
+            <div className="flex-none hidden lg:block">
+              <ul className="menu menu-horizontal gap-x-5 font-semibold">
                 {/* <!-- Navbar menu content here --> */}
                 <NavLinks />
               </ul>
             </div>
-            <div class="flex-none lg:hidden">
-              <label htmlFor="my-drawer-3" class="btn btn-square btn-ghost">
+            <div className="flex-none lg:hidden">
+              <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  class="inline-block w-6 h-6 stroke-current"
+                  className="inline-block w-6 h-6 stroke-current"
                 >
                   <path
                     strokeLinecap="round"
@@ -68,9 +68,9 @@ const Navbar = ({ children }) => {
         {children}
       </div>
 
-      <div class="drawer-side">
-        <label htmlFor="my-drawer-3" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+        <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
           {/* <!-- Sidebar content here --> */}
           <NavLinks />
         </ul>

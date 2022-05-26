@@ -18,9 +18,9 @@ const MyOrders = () => {
     refetch,
     data: myOrders,
   } = useQuery("myOrders", () =>
-    fetch(
-      `https://peaceful-lowlands-36792.herokuapp.com/order/${user?.email}`
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/order/${user?.email}`).then((res) =>
+      res.json()
+    )
   );
 
   if (isLoading) {
@@ -31,8 +31,8 @@ const MyOrders = () => {
 
   return (
     <div>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>
@@ -66,9 +66,15 @@ const MyOrders = () => {
                   )}
                 </td>
                 <td>
+                  {order.transactionId && (
+                    <div>
+                      TransactionID: <span>{order.transactionId}</span>
+                    </div>
+                  )}
+
                   {!order.paid && (
                     <label
-                      for="delete-confirm-modal"
+                      htmlFor="delete-confirm-modal"
                       className="btn btn-error btn-xs"
                       onClick={() => {
                         setDeletingOrderId(order._id);

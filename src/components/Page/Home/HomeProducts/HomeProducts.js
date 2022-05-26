@@ -10,9 +10,7 @@ const HomeProducts = () => {
     error,
     data: products,
   } = useQuery("products", () =>
-    fetch("https://peaceful-lowlands-36792.herokuapp.com/product").then((res) =>
-      res.json()
-    )
+    fetch("http://localhost:5000/product").then((res) => res.json())
   );
 
   if (isLoading) {
@@ -23,7 +21,7 @@ const HomeProducts = () => {
     <div className="container mx-auto">
       <PrimaryHeadline title="Our Products" />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
         {Array.isArray(products)
           ? products
               ?.slice(0, 3)

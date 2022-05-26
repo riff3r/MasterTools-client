@@ -13,9 +13,7 @@ const ManageProducts = () => {
     data: products,
     refetch,
   } = useQuery("products", () =>
-    fetch("https://peaceful-lowlands-36792.herokuapp.com/product").then((res) =>
-      res.json()
-    )
+    fetch("http://localhost:5000/product").then((res) => res.json())
   );
 
   if (isLoading) {
@@ -28,8 +26,8 @@ const ManageProducts = () => {
       <h1 className="text-3xl font-semibold border-b pb-3 mb-5">
         Manage Products
       </h1>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>

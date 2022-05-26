@@ -10,7 +10,7 @@ const MakeAdmin = () => {
     refetch,
     data: users,
   } = useQuery("allUser", () =>
-    fetch(`https://peaceful-lowlands-36792.herokuapp.com/users`, {
+    fetch(`http://localhost:5000/users`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -24,8 +24,8 @@ const MakeAdmin = () => {
 
   console.log(users);
   return (
-    <div class="overflow-x-auto">
-      <table class="table w-full">
+    <div className="overflow-x-auto">
+      <table className="table w-full">
         <thead>
           <tr>
             <th></th>

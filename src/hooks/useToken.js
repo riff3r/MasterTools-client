@@ -15,18 +15,13 @@ const useToken = (user) => {
 
   useEffect(() => {
     if (email) {
-      axios
-        .put(
-          `https://peaceful-lowlands-36792.herokuapp.com/user/${email}`,
-          userInfo
-        )
-        .then((res) => {
-          //   console.log(res.data.token);
-          const accessToken = res.data.token;
+      axios.put(`http://localhost:5000/user/${email}`, userInfo).then((res) => {
+        //   console.log(res.data.token);
+        const accessToken = res.data.token;
 
-          localStorage.setItem("accessToken", accessToken);
-          setToken(accessToken);
-        });
+        localStorage.setItem("accessToken", accessToken);
+        setToken(accessToken);
+      });
     }
   }, [user, email]);
 

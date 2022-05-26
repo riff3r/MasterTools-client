@@ -25,30 +25,28 @@ const AddReview = () => {
 
     console.log(data);
 
-    axios
-      .post("https://peaceful-lowlands-36792.herokuapp.com/review", data)
-      .then((res) => {
-        console.log(res);
-        if (res?.data?.acknowledged) {
-          reset();
-          toast.success("Review Uploaded");
-        }
-      });
+    axios.post("http://localhost:5000/review", data).then((res) => {
+      console.log(res);
+      if (res?.data?.acknowledged) {
+        reset();
+        toast.success("Review Uploaded");
+      }
+    });
   };
   return (
     <div className="flex items-center justify-center mt-52">
-      <div class="card w-96 bg-accent shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">Add Review</h2>
+      <div className="card w-96 bg-accent shadow-xl">
+        <div className="card-body">
+          <h2 className="card-title">Add Review</h2>
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Give us a rating</span>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Give us a rating</span>
               </label>
               <select
                 {...register("rating")}
-                class="select select-primary w-full max-w-xs mb-3"
+                className="select select-primary w-full max-w-xs mb-3"
               >
                 <option value={5}>5</option>
                 <option value={4}>4</option>
@@ -59,15 +57,15 @@ const AddReview = () => {
 
               <textarea
                 {...register("description", { required: true })}
-                class="textarea textarea-primary mb-3"
+                className="textarea textarea-primary mb-3"
                 placeholder="Review Description"
               ></textarea>
               {errors.description && (
                 <span className="text-red-500">This field is required</span>
               )}
 
-              <div class="card-actions justify-center">
-                <button class="btn btn-primary">Submit</button>
+              <div className="card-actions justify-center">
+                <button className="btn btn-primary">Submit</button>
               </div>
             </div>
           </form>
