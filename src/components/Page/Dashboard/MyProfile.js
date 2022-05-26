@@ -1,8 +1,14 @@
-import React from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
+import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import auth from "../../../firebase.init";
+import Loading from "../../Layout/Loading";
 
 const MyProfile = () => {
+  const [user] = useAuthState(auth);
+
   const {
     register,
     handleSubmit,
@@ -10,8 +16,33 @@ const MyProfile = () => {
     formState: { errors },
   } = useForm();
 
+  const {
+    isLoading,
+    error,
+    refetch,
+    data: myProfile,
+  } = useQuery("myProfile", () =>
+    fetch(`http://localhost:5000/user/${user?.email}`).then((res) => res.json())
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  console.log(myProfile);
+
   const onSubmit = (data) => {
     console.log(data);
+    axios
+      .put(`http://localhost:5000/user/${myProfile?.email}`, data)
+      .then((res) => {
+        //   console.log(res.data.token);
+        const accessToken = res.data.token;
+
+        localStorage.setItem("accessToken", accessToken);
+
+        refetch();
+      });
   };
 
   return (
@@ -19,11 +50,20 @@ const MyProfile = () => {
       <h1 className="text-3xl font-semibold border-b pb-3 mb-5">My Profile</h1>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div>
-          <h2 className="text-xl">Name: User Name</h2>
-          <h2 className="text-xl">Email: example@email.com</h2>
-          <h2 className="text-xl">Phone: 00000000</h2>
-          <h2 className="text-xl">Address: Full Address</h2>
-          <h2 className="text-xl">Linked in: https://www.linkedin.com/</h2>
+          <h2 className="text-xl">Name: {myProfile.name}</h2>
+          <h2 className="text-xl">Email: {myProfile.email}</h2>
+
+          {myProfile.number && (
+            <h2 className="text-xl">Phone: {myProfile.number}</h2>
+          )}
+
+          {myProfile.address && (
+            <h2 className="text-xl">Address: {myProfile.address}</h2>
+          )}
+
+          {myProfile.linkedin && (
+            <h2 className="text-xl">LinkedIn: {myProfile.linkedin}</h2>
+          )}
         </div>
 
         <div class="form-control w-full max-w-full">
@@ -63,8 +103,6 @@ const MyProfile = () => {
                     <button type="submit" class="btn btn-primary">
                       Submit
                     </button>
-
-                    <button class="btn btn-secondary">Edit</button>
                   </div>
                 </div>
               </form>

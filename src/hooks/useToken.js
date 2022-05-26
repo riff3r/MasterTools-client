@@ -6,21 +6,24 @@ const useToken = (user) => {
 
   const email = user?.user?.email;
 
-  const currentEmail = { email };
+  const userInfo = {
+    name: user?.user?.displayName,
+    email,
+  };
+
+  console.log(userInfo);
 
   useEffect(() => {
     if (email) {
-      axios
-        .put(`http://localhost:5000/user/${email}`, currentEmail)
-        .then((res) => {
-          //   console.log(res.data.token);
-          const accessToken = res.data.token;
+      axios.put(`http://localhost:5000/user/${email}`, userInfo).then((res) => {
+        //   console.log(res.data.token);
+        const accessToken = res.data.token;
 
-          localStorage.setItem("accessToken", accessToken);
-          setToken(accessToken);
-        });
+        localStorage.setItem("accessToken", accessToken);
+        setToken(accessToken);
+      });
     }
-  }, [user]);
+  }, [user, email]);
 
   return [token];
 };
