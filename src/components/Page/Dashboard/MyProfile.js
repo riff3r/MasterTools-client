@@ -22,7 +22,9 @@ const MyProfile = () => {
     refetch,
     data: myProfile,
   } = useQuery("myProfile", () =>
-    fetch(`http://localhost:5000/user/${user?.email}`).then((res) => res.json())
+    fetch(
+      `https://peaceful-lowlands-36792.herokuapp.com/user/${user?.email}`
+    ).then((res) => res.json())
   );
 
   if (isLoading) {
@@ -34,7 +36,10 @@ const MyProfile = () => {
   const onSubmit = (data) => {
     console.log(data);
     axios
-      .put(`http://localhost:5000/user/${myProfile?.email}`, data)
+      .put(
+        `https://peaceful-lowlands-36792.herokuapp.com/user/${myProfile?.email}`,
+        data
+      )
       .then((res) => {
         //   console.log(res.data.token);
         const accessToken = res.data.token;

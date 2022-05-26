@@ -10,14 +10,16 @@ const DeleteConfirmModal = ({
 }) => {
   const handleDeleteOrder = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:5000/${url}/${id}`).then((res) => {
-      console.log(res);
-      if (res.data.deletedCount > 0) {
-        setDeleteOrder(null);
-        refetch();
-        toast.error(`${url} has been deleted`);
-      }
-    });
+    axios
+      .delete(`https://peaceful-lowlands-36792.herokuapp.com/${url}/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.deletedCount > 0) {
+          setDeleteOrder(null);
+          refetch();
+          toast.error(`${url} has been deleted`);
+        }
+      });
   };
   return (
     <div>

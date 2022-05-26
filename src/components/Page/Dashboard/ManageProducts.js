@@ -13,7 +13,9 @@ const ManageProducts = () => {
     data: products,
     refetch,
   } = useQuery("products", () =>
-    fetch("http://localhost:5000/product").then((res) => res.json())
+    fetch("https://peaceful-lowlands-36792.herokuapp.com/product").then((res) =>
+      res.json()
+    )
   );
 
   if (isLoading) {

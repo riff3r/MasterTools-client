@@ -15,7 +15,7 @@ const ManageAllOrders = () => {
     data: orders,
     refetch,
   } = useQuery("allOrders", () =>
-    fetch("http://localhost:5000/order", {
+    fetch("https://peaceful-lowlands-36792.herokuapp.com/order", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -33,7 +33,7 @@ const ManageAllOrders = () => {
       productId: order.productId,
       quantity: order.quantity,
     };
-    fetch(`http://localhost:5000/status/${order._id}`, {
+    fetch(`https://peaceful-lowlands-36792.herokuapp.com/status/${order._id}`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

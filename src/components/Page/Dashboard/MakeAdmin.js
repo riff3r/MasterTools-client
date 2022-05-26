@@ -10,7 +10,7 @@ const MakeAdmin = () => {
     refetch,
     data: users,
   } = useQuery("allUser", () =>
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://peaceful-lowlands-36792.herokuapp.com/users`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

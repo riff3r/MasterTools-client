@@ -8,7 +8,7 @@ const Review = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/review")
+      .get("https://peaceful-lowlands-36792.herokuapp.com/review")
       .then((res) => setReviews(res.data));
   }, []);
 

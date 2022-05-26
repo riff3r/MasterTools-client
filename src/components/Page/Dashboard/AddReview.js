@@ -25,13 +25,15 @@ const AddReview = () => {
 
     console.log(data);
 
-    axios.post("http://localhost:5000/review", data).then((res) => {
-      console.log(res);
-      if (res?.data?.acknowledged) {
-        reset();
-        toast.success("Review Uploaded");
-      }
-    });
+    axios
+      .post("https://peaceful-lowlands-36792.herokuapp.com/review", data)
+      .then((res) => {
+        console.log(res);
+        if (res?.data?.acknowledged) {
+          reset();
+          toast.success("Review Uploaded");
+        }
+      });
   };
   return (
     <div className="flex items-center justify-center mt-52">
