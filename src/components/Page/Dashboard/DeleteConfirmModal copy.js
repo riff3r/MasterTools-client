@@ -2,20 +2,15 @@ import axios from "axios";
 import React from "react";
 import { toast } from "react-toastify";
 
-const DeleteConfirmModal = ({
-  order,
-  setDeleteOrder,
-  refetch,
-  url = "order",
-}) => {
+const DeleteConfirmModal = ({ order, setDeleteOrder, refetch }) => {
   const handleDeleteOrder = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:5000/${url}/${id}`).then((res) => {
+    axios.delete(`http://localhost:5000/order/${id}`).then((res) => {
       console.log(res);
       if (res.data.deletedCount > 0) {
         setDeleteOrder(null);
         refetch();
-        toast.error(`${url} has been deleted`);
+        toast.error("Your Order has been Canceled");
       }
     });
   };
@@ -31,9 +26,9 @@ const DeleteConfirmModal = ({
       <div class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
           <h3 class="font-bold text-lg text text-red-500">
-            Do you want to delete this {url}?
+            Do you want to cancel this order?
           </h3>
-          <p class="py-4">Once you delete the {url} it's can't be undo!</p>
+          <p class="py-4">Once you delete the order it's can't be undo!</p>
           <div class="modal-action">
             <label
               onClick={() => handleDeleteOrder(order)}

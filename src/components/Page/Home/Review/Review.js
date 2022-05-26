@@ -14,7 +14,7 @@ const Review = () => {
 
   console.log(reviews);
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto mb-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
         {reviews?.map((review) => (
           <div key={review._id} className="shadow-lg p-10">
