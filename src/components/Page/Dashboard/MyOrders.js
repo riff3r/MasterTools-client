@@ -18,9 +18,9 @@ const MyOrders = () => {
     refetch,
     data: myOrders,
   } = useQuery("myOrders", () =>
-    fetch(`http://localhost:5000/order/${user?.email}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://peaceful-lowlands-36792.herokuapp.com/order/${user?.email}`
+    ).then((res) => res.json())
   );
 
   if (isLoading) {

@@ -17,7 +17,7 @@ const CheckoutForm = ({ order }) => {
   // totaltotalPrice, title, userName
 
   useEffect(() => {
-    const url = `http://localhost:5000/create-payment-intent`;
+    const url = `https://peaceful-lowlands-36792.herokuapp.com/create-payment-intent`;
     fetch(url, {
       method: "POST",
       headers: {
@@ -87,7 +87,7 @@ const CheckoutForm = ({ order }) => {
         transactionId: paymentIntent.id,
       };
 
-      fetch(`http://localhost:5000/order/${_id}`, {
+      fetch(`https://peaceful-lowlands-36792.herokuapp.com/order/${_id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

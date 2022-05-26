@@ -20,7 +20,9 @@ const Purchase = () => {
     data: product,
     refetch,
   } = useQuery("products", () =>
-    fetch(`http://localhost:5000/product/${id}`).then((res) => res.json())
+    fetch(`https://peaceful-lowlands-36792.herokuapp.com/product/${id}`).then(
+      (res) => res.json()
+    )
   );
 
   const {
@@ -56,12 +58,14 @@ const Purchase = () => {
     };
 
     console.log(order);
-    axios.post(`http://localhost:5000/order`, order).then((res) => {
-      if (res.data.acknowledged) {
-        reset();
-        toast.success("You order placed");
-      }
-    });
+    axios
+      .post(`https://peaceful-lowlands-36792.herokuapp.com/order`, order)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          reset();
+          toast.success("You order placed");
+        }
+      });
   };
 
   if (isLoading) {

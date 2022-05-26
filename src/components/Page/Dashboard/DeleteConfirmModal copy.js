@@ -5,14 +5,16 @@ import { toast } from "react-toastify";
 const DeleteConfirmModal = ({ order, setDeleteOrder, refetch }) => {
   const handleDeleteOrder = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:5000/order/${id}`).then((res) => {
-      console.log(res);
-      if (res.data.deletedCount > 0) {
-        setDeleteOrder(null);
-        refetch();
-        toast.error("Your Order has been Canceled");
-      }
-    });
+    axios
+      .delete(`https://peaceful-lowlands-36792.herokuapp.com/order/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.deletedCount > 0) {
+          setDeleteOrder(null);
+          refetch();
+          toast.error("Your Order has been Canceled");
+        }
+      });
   };
   return (
     <div>

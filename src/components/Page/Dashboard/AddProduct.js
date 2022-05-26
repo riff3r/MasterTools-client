@@ -14,13 +14,15 @@ const AddProduct = () => {
   const onSubmit = (data) => {
     console.log(data);
 
-    axios.post("http://localhost:5000/product", data).then((res) => {
-      console.log(res);
-      if (res?.data?.acknowledged) {
-        reset();
-        toast.success("Product Uploaded");
-      }
-    });
+    axios
+      .post("https://peaceful-lowlands-36792.herokuapp.com/product", data)
+      .then((res) => {
+        console.log(res);
+        if (res?.data?.acknowledged) {
+          reset();
+          toast.success("Product Uploaded");
+        }
+      });
   };
 
   return (
